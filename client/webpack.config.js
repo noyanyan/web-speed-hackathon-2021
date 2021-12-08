@@ -22,6 +22,7 @@ const config = {
   },
   devtool: NODE_ENV === 'production' ? false : 'inline-source-map',
   entry: {
+    // main: [path.resolve(SRC_PATH, './index.jsx')],
     main: [
       'core-js',
       'regenerator-runtime/runtime',
@@ -32,6 +33,8 @@ const config = {
     ],
   },
   mode: process.env.NODE_ENV,
+  devtool: 'inline-source-map',
+  // mode: process.env.NODE_ENV, //'production', //process.env.NODE_ENV,
   module: {
     rules: [
       {
