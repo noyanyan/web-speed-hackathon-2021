@@ -22,11 +22,11 @@ export function useFetch(apiPath, fetcher) {
   });
 
   React.useEffect(() => {
-    setResult(() => ({
+    setResult({
       data: null,
       error: null,
       isLoading: true,
-    }));
+    });
 
     const promise = fetcher(apiPath);
 

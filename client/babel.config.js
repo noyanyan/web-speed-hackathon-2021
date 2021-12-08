@@ -12,7 +12,9 @@ module.exports = {
       '@babel/preset-react',
       {
         development: true,
+        runtime: 'automatic',
       },
     ],
   ],
+  plugins: ['@babel/plugin-syntax-dynamic-import'],
 };

@@ -41,6 +41,7 @@ export function useInfiniteFetch(apiPath, fetcher) {
       offset,
     };
 
+    // 全件取得しているため、これを部分取得に
     const promise = fetcher(apiPath);
 
     promise.then((allData) => {

@@ -8,7 +8,8 @@ import { fetchJSON } from '../../utils/fetchers';
 
 /** @type {React.VFC} */
 const TimelineContainer = () => {
-  const { data: posts, fetchMore } = useInfiniteFetch('/api/v1/posts', fetchJSON);
+  // FIXME: limitとoffsetを一時的に軽くした
+  const { data: posts, fetchMore } = useInfiniteFetch('/api/v1/posts?limit=30&offset=30', fetchJSON);
 
   return (
     <InfiniteScroll fetchMore={fetchMore} items={posts}>
