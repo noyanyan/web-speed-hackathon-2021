@@ -9,12 +9,9 @@
 
 - バンドルサイズ確認
 - import 文のサポート
-- 対象ブラウザの確認
+- 対象ブラウザの確認 => chrome
 
 ````js
-WARNING in DefinePlugin
-Conflicting values for 'process.env.NODE_ENV'
-
 WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
 This can impact web performance.
 Assets:

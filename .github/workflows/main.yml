@@ -15,5 +15,5 @@ jobs:
         with:
           # PRコメント欄に通知するために必要です
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
-  +       pattern: './dist/**/*.{js,css,html,json,gz}'
-  +       exclude: '{./dist/manifest.json,**/*.map,**/node_modules/**}'
+          pattern: './dist/**/*.{js,css,html,json,gz}'
+          exclude: '{./dist/manifest.json,**/*.map,**/node_modules/**}'
