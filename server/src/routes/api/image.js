@@ -23,6 +23,7 @@ router.post('/images', async (req, res) => {
 
   const imageId = uuidv4();
 
+  // FIXME: 拡張子のサイズを指定する。アバターとbodyの可能性があるため、一括ではできない。デフォルト値？
   const converted = await convertImage(req.body, {
     // 画像の拡張子を指定する
     extension: EXTENSION,

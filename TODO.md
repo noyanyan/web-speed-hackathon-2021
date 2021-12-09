@@ -32,6 +32,11 @@ Entrypoints:
 
 - 確認
 
+## webfont
+ルール確認
+削除でok?
+
+
 ## router
 
 - code splitting
@@ -39,4 +44,15 @@ Entrypoints:
 ## 画像
 
 画像サイズ
+圧縮
 ````
+
+## moment.js
+
+## bluebird
+
+## lodash
+
+## corejs
+
+## jquery

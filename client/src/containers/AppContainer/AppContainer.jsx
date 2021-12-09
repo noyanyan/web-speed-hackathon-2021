@@ -5,21 +5,23 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { AppPage } from '../../components/application/AppPage';
 import { useFetch } from '../../hooks/use_fetch';
 import { fetchJSON } from '../../utils/fetchers';
-// import { AuthModalContainer } from '../AuthModalContainer';
-// import { NewPostModalContainer } from '../NewPostModalContainer';
-// import { NotFoundContainer } from '../NotFoundContainer';
-// import { PostContainer } from '../PostContainer';
-// import { TermContainer } from '../TermContainer';
-// import { TimelineContainer } from '../TimelineContainer';
-// import { UserProfileContainer } from '../UserProfileContainer';
+import { AuthModalContainer } from '../AuthModalContainer';
+import { NewPostModalContainer } from '../NewPostModalContainer';
+import { NotFoundContainer } from '../NotFoundContainer';
+import { PostContainer } from '../PostContainer';
+import { TermContainer } from '../TermContainer';
+import { TimelineContainer } from '../TimelineContainer';
+import { UserProfileContainer } from '../UserProfileContainer';
 
-const AuthModalContainer = React.lazy(() => import('../AuthModalContainer'));
-const NewPostModalContainer = React.lazy(() => import('../NewPostModalContainer'));
-const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
-const PostContainer = React.lazy(() => import('../PostContainer'));
-const TermContainer = React.lazy(() => import('../TermContainer'));
-const TimelineContainer = React.lazy(() => import('../TimelineContainer'));
-const UserProfileContainer = React.lazy(() => import('../UserProfileContainer'));
+// const AuthModalContainer = React.lazy(() =>
+//   import(/* webpackChunkName: "AuthModalContainer" */ '../AuthModalContainer'),
+// );
+// const NewPostModalContainer = React.lazy(() => import('../NewPostModalContainer'));
+// const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
+// const PostContainer = React.lazy(() => import('../PostContainer'));
+// const TermContainer = React.lazy(() => import('../TermContainer'));
+// const TimelineContainer = React.lazy(() => import('../TimelineContainer'));
+// const UserProfileContainer = React.lazy(() => import('../UserProfileContainer'));
 
 /** @type {React.VFC} */
 const AppContainer = () => {
