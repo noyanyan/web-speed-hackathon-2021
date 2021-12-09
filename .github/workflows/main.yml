@@ -15,4 +15,4 @@ jobs:
         with:
           # PRコメント欄に通知するために必要です
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
-          build-script: 'yarn --cwd ./client  build'
+          build-script: '--cwd ./client  build'
