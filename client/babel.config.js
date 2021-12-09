@@ -4,15 +4,17 @@ module.exports = {
       '@babel/preset-env',
       {
         corejs: '3',
-        modules: 'commonjs',
-        useBuiltIns: false,
+        modules: 'auto',
+        useBuiltIns: 'usage',
       },
     ],
     [
       '@babel/preset-react',
       {
         development: true,
+        runtime: 'automatic',
       },
     ],
   ],
+  plugins: ['@babel/plugin-syntax-dynamic-import'],
 };

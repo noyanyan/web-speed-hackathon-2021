@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const SRC_PATH = path.resolve(__dirname, './src');
 const PUBLIC_PATH = path.resolve(__dirname, '../public');
@@ -20,24 +21,41 @@ const config = {
     },
     static: [PUBLIC_PATH, UPLOAD_PATH],
   },
-  devtool: 'inline-source-map',
+  devtool: process.env.NODE_ENV === 'production' ? false : 'inline-source-map',
   entry: {
+    // main: [path.resolve(SRC_PATH, './index.jsx')],
+    // main: [
+    //   path.resolve(SRC_PATH, './index.css', path.resolve(SRC_PATH, './buildinfo.js')),
+    //   path.resolve(SRC_PATH, './index.jsx'),
+    // ],
     main: [
       'core-js',
-      'regenerator-runtime/runtime',
       'jquery-binarytransport',
       path.resolve(SRC_PATH, './index.css'),
       path.resolve(SRC_PATH, './buildinfo.js'),
       path.resolve(SRC_PATH, './index.jsx'),
     ],
   },
-  mode: 'none',
+  mode: process.env.NODE_ENV,
+  devtool: process.env.NODE_ENV === 'production' ? false : 'inline-source-map',
+  // mode: process.env.NODE_ENV, //'production', //process.env.NODE_ENV,
   module: {
     rules: [
       {
         exclude: /node_modules/,
         test: /\.jsx?$/,
-        use: [{ loader: 'babel-loader' }],
+        use: [
+          {
+            loader: 'babel-loader',
+            // options: {
+            //   presets: [
+            //     // プリセットを指定することで、ES2021 を ES5 に変換
+            //     '@babel/preset-env',
+            //     // '@babel/preset-react',
+            //   ],
+            // },
+          },
+        ],
       },
       {
         test: /\.css$/i,
@@ -69,6 +87,7 @@ const config = {
     new MiniCssExtractPlugin({
       filename: 'styles/[name].css',
     }),
+    // new BundleAnalyzerPlugin({ generateStatsFile: true }),
     new HtmlWebpackPlugin({
       inject: false,
       template: path.resolve(SRC_PATH, './index.html'),

@@ -13,6 +13,16 @@ import { TermContainer } from '../TermContainer';
 import { TimelineContainer } from '../TimelineContainer';
 import { UserProfileContainer } from '../UserProfileContainer';
 
+// const AuthModalContainer = React.lazy(() =>
+//   import(/* webpackChunkName: "AuthModalContainer" */ '../AuthModalContainer'),
+// );
+// const NewPostModalContainer = React.lazy(() => import('../NewPostModalContainer'));
+// const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
+// const PostContainer = React.lazy(() => import('../PostContainer'));
+// const TermContainer = React.lazy(() => import('../TermContainer'));
+// const TimelineContainer = React.lazy(() => import('../TimelineContainer'));
+// const UserProfileContainer = React.lazy(() => import('../UserProfileContainer'));
+
 /** @type {React.VFC} */
 const AppContainer = () => {
   const { pathname } = useLocation();
@@ -31,34 +41,34 @@ const AppContainer = () => {
   const handleRequestOpenPostModal = React.useCallback(() => setModalType('post'), []);
   const handleRequestCloseModal = React.useCallback(() => setModalType('none'), []);
 
-  if (isLoading) {
-    return (
-      <Helmet>
-        <title>読込中 - CAwitter</title>
-      </Helmet>
-    );
-  }
-
   return (
     <>
-      <AppPage
-        activeUser={activeUser}
-        onRequestOpenAuthModal={handleRequestOpenAuthModal}
-        onRequestOpenPostModal={handleRequestOpenPostModal}
-      >
-        <Routes>
-          <Route element={<TimelineContainer />} path="/" />
-          <Route element={<UserProfileContainer />} path="/users/:username" />
-          <Route element={<PostContainer />} path="/posts/:postId" />
-          <Route element={<TermContainer />} path="/terms" />
-          <Route element={<NotFoundContainer />} path="*" />
-        </Routes>
-      </AppPage>
-
-      {modalType === 'auth' ? (
-        <AuthModalContainer onRequestCloseModal={handleRequestCloseModal} onUpdateActiveUser={setActiveUser} />
-      ) : null}
-      {modalType === 'post' ? <NewPostModalContainer onRequestCloseModal={handleRequestCloseModal} /> : null}
+      <React.Suspense>
+        {isLoading && (
+          <Helmet>
+            <title>読込中 - CAwitter</title>
+          </Helmet>
+        )}
+        <React.Suspense fallback={<h1>Loading All Routes</h1>}>
+          <AppPage
+            activeUser={activeUser}
+            onRequestOpenAuthModal={handleRequestOpenAuthModal}
+            onRequestOpenPostModal={handleRequestOpenPostModal}
+          >
+            <Routes>
+              <Route element={<TimelineContainer />} path="/" />
+              <Route element={<UserProfileContainer />} path="/users/:username" />
+              <Route element={<PostContainer />} path="/posts/:postId" />
+              <Route element={<TermContainer />} path="/terms" />
+              <Route element={<NotFoundContainer />} path="*" />
+            </Routes>
+          </AppPage>
+        </React.Suspense>
+        {modalType === 'auth' ? (
+          <AuthModalContainer onRequestCloseModal={handleRequestCloseModal} onUpdateActiveUser={setActiveUser} />
+        ) : null}
+        {modalType === 'post' ? <NewPostModalContainer onRequestCloseModal={handleRequestCloseModal} /> : null}
+      </React.Suspense>
     </>
   );
 };
