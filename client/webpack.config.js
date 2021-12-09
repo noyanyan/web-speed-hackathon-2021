@@ -31,15 +31,25 @@ const config = {
     //   path.resolve(SRC_PATH, './index.css', path.resolve(SRC_PATH, './buildinfo.js')),
     //   path.resolve(SRC_PATH, './index.jsx'),
     // ],
-    main: [
-      'core-js',
-      'jquery-binarytransport',
-      path.resolve(SRC_PATH, './index.css'),
-      path.resolve(SRC_PATH, './buildinfo.js'),
-      path.resolve(SRC_PATH, './index.jsx'),
-    ],
+    vendor: ['react', 'react-dom', 'react-router'],
+
+    main: {
+      import: [
+        'jquery-binarytransport',
+        path.resolve(SRC_PATH, './index.css'),
+        path.resolve(SRC_PATH, './buildinfo.js'),
+        path.resolve(SRC_PATH, './index.jsx'),
+      ],
+      dependOn: 'vendor',
+    },
   },
-  mode: process.env.NODE_ENV,
+  output: {
+    filename: 'scripts/[name].[hash].js',
+    path: DIST_PATH,
+    // publicPath: '/', can uncomment if you want everything relative to root '/'
+    chunkFilename: '[name].[hash].js',
+  },
+  mode: 'production',
   devtool: process.env.NODE_ENV === 'production' ? false : 'inline-source-map',
   // mode: process.env.NODE_ENV, //'production', //process.env.NODE_ENV,
   module: {
@@ -70,10 +80,7 @@ const config = {
       },
     ],
   },
-  output: {
-    filename: 'scripts/[name].js',
-    path: DIST_PATH,
-  },
+
   plugins: [
     new webpack.ProvidePlugin({
       $: 'jquery',
