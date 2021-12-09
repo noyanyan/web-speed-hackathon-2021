@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CompressionPlugin = require('compression-webpack-plugin');
 
@@ -44,10 +45,10 @@ const config = {
     },
   },
   output: {
-    filename: 'scripts/[name].[hash].js',
+    filename: 'scripts/[name]js',
     path: DIST_PATH,
     // publicPath: '/', can uncomment if you want everything relative to root '/'
-    chunkFilename: '[name].[hash].js',
+    chunkFilename: '[name]js',
   },
   mode: 'production',
   devtool: process.env.NODE_ENV === 'production' ? false : 'inline-source-map',
@@ -112,10 +113,12 @@ const config = {
     },
   },
   optimization: {
+    minimize: true,
     minimizer: [
       // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
       // `...`,
       new CssMinimizerPlugin(),
+      new TerserPlugin(),
     ],
   },
 };
