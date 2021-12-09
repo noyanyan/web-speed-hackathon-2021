@@ -1,0 +1,19 @@
+name: compressed-size-action
+uses: preactjs/compressed-size-action@v2
+
+on:
+  pull_request:
+
+# https://zenn.dev/yizumi1012xxx/articles/1c90887af13be0650fee
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      # GitHubActionsが実行されたブランチにチェックアウトする
+      - uses: actions/checkout@v2
+      # ビルドファイルの生成＆ファイルサイズの取得＆通知
+      - uses: preactjs/compressed-size-action@v2
+        with:
+          # PRコメント欄に通知するために必要です
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          build-script: 'yarn --cwd ./client  build'
